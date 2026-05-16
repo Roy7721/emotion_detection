@@ -5,6 +5,9 @@ from sklearn.model_selection import train_test_split
 import yaml
 import os
 import logging
+from dvclive import Live
+
+live = Live(save_dvc_exp=True)
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -23,6 +26,7 @@ def load_param(params_path: str) -> float:
     try:
         with open(params_path) as f:
             params = yaml.safe_load(f)
+            live.log_params({"test_size": params['make_dataset']['test_size']})
             logger.info(f"Parameters loaded successfully from {params_path}")
             test_size = params['make_dataset']['test_size']
             logger.debug(f"Test size parameter: {test_size}")

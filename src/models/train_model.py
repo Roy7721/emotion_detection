@@ -4,7 +4,9 @@ import pickle
 import yaml
 import os
 import logging
+from dvclive import Live
 
+live = Live(save_dvc_exp=True)
 
 # =========================
 # Logging Configuration
@@ -74,7 +76,9 @@ def train_model(
         yaml_content = yaml.safe_load(
             open(params_path, 'r')
         )
-
+        live.log_params({
+            "n_estimators": yaml_content['model_building']['n_estimators']
+        })
         n_estimators = yaml_content[
             'model_building'
         ]['n_estimators']

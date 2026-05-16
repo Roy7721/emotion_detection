@@ -3,14 +3,14 @@ import pandas as pd
 import yaml
 import os
 import logging
-
+from dvclive import Live
 from sklearn.feature_extraction.text import CountVectorizer
 
 
 # =========================
 # Logging Configuration
 # =========================
-
+live = Live(save_dvc_exp=True)
 logging.basicConfig(
     level=logging.DEBUG,
     format='%(asctime)s - %(levelname)s - %(message)s'
@@ -86,10 +86,13 @@ def feature_engineering(
 
         logger.info("Loading parameters from params.yaml")
 
+        
         yaml_content = yaml.safe_load(
             open(params_path, 'r')
         )
-
+        live.log_params({
+            "max_features": yaml_content['feature_engineering']['max_features']
+        })
         max_features = yaml_content[
             'feature_engineering'
         ]['max_features']

@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-
+from dvclive import Live
 from sklearn.metrics import (
     precision_score,
     accuracy_score,
@@ -108,7 +108,7 @@ def predict(model, x_test):
 # =========================
 # Model Evaluation
 # =========================
-
+live = Live(save_dvc_exp=True)
 def evaluate_model(y_test, y_pred):
 
     try:
@@ -128,7 +128,9 @@ def evaluate_model(y_test, y_pred):
             y_pred,
             average='weighted'
         )
-
+        live.log_metric("accuracy", accuracy)
+        live.log_metric("precision", precision)
+        live.log_metric("recall", recall)
         logger.info(
             f"Accuracy: {accuracy}"
         )
