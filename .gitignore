@@ -1,4 +1,4 @@
-models/
+models/*.pkl
 myenv/
 reports/
 
