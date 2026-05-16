@@ -9,11 +9,11 @@ stages:
       size: 2612
     params:
       params.yaml:
-        make_dataset.test_size: 0.5
+        make_dataset.test_size: 0.25
     outs:
     - path: data/raw
       hash: md5
-      md5: 20749d519fc77a52e63ad1ee7246a959.dir
+      md5: 3ccd138d92666c705332b1d30ff89249.dir
       size: 900635
       nfiles: 2
   data_preprocessing:
@@ -21,7 +21,7 @@ stages:
     deps:
     - path: data/raw
       hash: md5
-      md5: 20749d519fc77a52e63ad1ee7246a959.dir
+      md5: 3ccd138d92666c705332b1d30ff89249.dir
       size: 900635
       nfiles: 2
     - path: src/data/data_preprocessing.py
@@ -31,7 +31,7 @@ stages:
     outs:
     - path: data/processed
       hash: md5
-      md5: e079cb15043c97c4eefc230536ac9316.dir
+      md5: 0f5c59951976eb7e4937d45b6e9f73b1.dir
       size: 638872
       nfiles: 2
   feature_engineering:
@@ -39,20 +39,20 @@ stages:
     deps:
     - path: data/processed
       hash: md5
-      md5: e079cb15043c97c4eefc230536ac9316.dir
+      md5: 0f5c59951976eb7e4937d45b6e9f73b1.dir
       size: 638872
       nfiles: 2
     - path: src/features/build_features.py
       hash: md5
-      md5: 8da88ea50064f56f1afa1d2091e5d56c
-      size: 4620
+      md5: 2ae7e53f07f7f184f0c4b33e69352576
+      size: 4628
     params:
       params.yaml:
         feature_engineering.max_features: 50
     outs:
     - path: data/interim
       hash: md5
-      md5: 2f1379568403d67c3ef5012e1ef62ed6.dir
+      md5: bf5a3026ad96ccd29b86e035cfa9ba76.dir
       size: 1141258
       nfiles: 2
   model_building:
@@ -60,31 +60,31 @@ stages:
     deps:
     - path: data/interim
       hash: md5
-      md5: 2f1379568403d67c3ef5012e1ef62ed6.dir
+      md5: bf5a3026ad96ccd29b86e035cfa9ba76.dir
       size: 1141258
       nfiles: 2
     - path: src/models/train_model.py
       hash: md5
-      md5: 77fdedd5a386b1bdd03941cca3037dde
-      size: 3458
+      md5: fb6f94b7e33f6686958c023027cbbe12
+      size: 3478
     outs:
     - path: models/model.pkl
       hash: md5
-      md5: 9b01d175f42a3033e2b8c8da09eae83e
-      size: 16185404
+      md5: c88fcc080f4995c7705c59a3f9c44d2a
+      size: 137735
   model_evaluation:
     cmd: python src/models/predict_model.py
     deps:
     - path: models/model.pkl
       hash: md5
-      md5: 9b01d175f42a3033e2b8c8da09eae83e
-      size: 16185404
+      md5: c88fcc080f4995c7705c59a3f9c44d2a
+      size: 137735
     - path: src/models/predict_model.py
       hash: md5
-      md5: 4cdec1215066e66a39caa69cde0a4637
-      size: 4393
+      md5: 01ba63574f592801e89ebcc4140b4191
+      size: 4397
     outs:
     - path: metrics.json
       hash: md5
-      md5: f978ac644050e19a0b9c7b4d6cc77da8
+      md5: 08831e89c98064d32a99b8b336923184
       size: 113
