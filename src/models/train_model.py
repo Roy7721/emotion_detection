@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier
 import pickle
 import yaml
 import os
@@ -38,7 +38,7 @@ def load_data(data_path: str):
         logger.info("Loading training feature data")
 
         train_df = pd.read_csv(
-            os.path.join(data_path, 'train_bow(gb).csv')
+            os.path.join(data_path, 'train_bow(rf).csv')
         )
 
         logger.info("Training data loaded successfully")
@@ -80,15 +80,15 @@ def train_model(
         ]['n_estimators']
 
         logger.info(
-            f"Initializing GradientBoostingClassifier with n_estimators={n_estimators}"
+            f"Initializing RandomForestClassifier with n_estimators={n_estimators}"
         )
 
-        model = GradientBoostingClassifier(
+        model = RandomForestClassifier(
             n_estimators=n_estimators,
             random_state=42
         )
 
-        logger.info("Training Gradient Boosting model")
+        logger.info("Training Random Forest model")
 
         model.fit(x_train, y_train)
 

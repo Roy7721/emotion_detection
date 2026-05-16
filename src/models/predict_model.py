@@ -68,7 +68,7 @@ def load_test_data(test_data_path: str):
         logger.info("Loading test feature data")
 
         test_df = pd.read_csv(
-            os.path.join(test_data_path, 'test_bow(gb).csv')
+            os.path.join(test_data_path, 'test_bow(rf).csv')
         )
 
         x_test = test_df.drop('label', axis=1)

@@ -150,12 +150,12 @@ def save_features(
         os.makedirs(data_processed_path, exist_ok=True)
 
         train_df.to_csv(
-            os.path.join(data_processed_path, 'train_bow.csv'),
+            os.path.join(data_processed_path, 'train_bow(rf).csv'),
             index=False
         )
 
         test_df.to_csv(
-            os.path.join(data_processed_path, 'test_bow.csv'),
+            os.path.join(data_processed_path, 'test_bow(rf).csv'),
             index=False
         )
 
